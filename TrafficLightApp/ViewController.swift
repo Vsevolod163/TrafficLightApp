@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     @IBOutlet var redLightView: UIView!
     @IBOutlet var yellowLightView: UIView!
@@ -16,10 +16,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        redLightView.layer.cornerRadius = 50
-        yellowLightView.layer.cornerRadius = 50
-        greenLightView.layer.cornerRadius = 50
+        redLightView.layer.cornerRadius = redLightView.frame.width / 2
+        yellowLightView.layer.cornerRadius = yellowLightView.frame.width / 2
+        greenLightView.layer.cornerRadius = greenLightView.frame.width / 2
         startButton.layer.cornerRadius = 10
     }
     
@@ -27,18 +26,20 @@ class ViewController: UIViewController {
         let alphaOfRedLight = round(redLightView.alpha * 10) / 10
         let alphaOfYellowLight = round(yellowLightView.alpha * 10) / 10
         let alphaOfGreenLight = round(greenLightView.alpha * 10) / 10
+        let lowAlpha: CGFloat = 0.3
+        let hightAlpha: CGFloat = 1
         
         startButton.setTitle("Next", for: .normal)
         
-        if alphaOfYellowLight == 0.3 && alphaOfRedLight == 0.3 {
-            greenLightView.alpha = 0.3
-            redLightView.alpha = 1
-        } else if alphaOfYellowLight == 0.3 {
-            redLightView.alpha = 0.3
-            yellowLightView.alpha = 1
-        } else if alphaOfGreenLight == 0.3 {
-            yellowLightView.alpha = 0.3
-            greenLightView.alpha = 1
+        if alphaOfYellowLight == lowAlpha && alphaOfRedLight == lowAlpha {
+            greenLightView.alpha = lowAlpha
+            redLightView.alpha = hightAlpha
+        } else if alphaOfYellowLight == lowAlpha {
+            redLightView.alpha = lowAlpha
+            yellowLightView.alpha = hightAlpha
+        } else if alphaOfGreenLight == lowAlpha {
+            yellowLightView.alpha = lowAlpha
+            greenLightView.alpha = hightAlpha
         }
     }
 }
